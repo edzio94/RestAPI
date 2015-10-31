@@ -10,12 +10,12 @@ class DataHandler:
         print("Creating DataHandler")
         self.dataBaseResult = 'null'
 
+
     def saveJson(self, Values):
-        for x in Values:
-            self.json.append([])
-            for value in Values.values():
-                self.json[len(self.json) - 1].append(value)
+        self.jsonFormat = Values
 
     def getBooks(self, conn):
         self.dataBaseResult = conn.db.select('book_releases')
         return conn.db.select('book_releases')
+
+

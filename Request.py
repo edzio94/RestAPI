@@ -1,3 +1,4 @@
+import json
 import DataHandler
 from DatabaseConnector import Connector
 import JsonParser
@@ -6,24 +7,39 @@ __author__ = 'lukasz'
 import web
 
 urls = (
-    '/','index','getbooks'
+    '/', 'index', 'getbooks'
 
 )
+
 
 class index:
     def __init__(self):
         self.conn = Connector()
-        self.test = DataHandler.DataHandler()
-#        print(self.db)
-        self.test.getBooks(self.conn)
-        for x in self.test.dataBaseResult:
-             print(x.values()) #Prints actual values of dataBaseResuy=lt
-        #self.values = JsonParser.getJsonFile(DataHandler.getBooks(self.test))
+        self.dataHandler = DataHandler.DataHandler()
+        self.list = []
+        #        print(self.db)
+        self.dataHandler.getBooks(self.conn)
+
+        self.t = {}
+        #self.t.update(self.dataHandler.dataBaseResult)
+        for x in self.dataHandler.dataBaseResult:
+            self.t.update(x)
+
+        print(self.t)
+        parser = JsonParser.JsonParser()
+        self.dataHandler.saveJson(parser.setJsonFile(self.t))
+        print('Koniec')
+
+
+
 
     def GET(self):
-        print(self.test.dataBaseResult)
+        print(self.dataHandler.dataBaseResult)
+
+
+    def showData(self):
+        print(self.dataHandler.jsonData)
 
 get = index()
 get.GET()
-
-
+get.showData()
