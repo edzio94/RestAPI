@@ -26,8 +26,9 @@ class index:
             self.t.update(x)
 
         print(self.t)
+        print(len(self.t))
         parser = JsonParser.JsonParser()
-        self.dataHandler.saveJson(parser.setJsonFile(self.t))
+        self.dataHandler.JSON = parser.setJsonFile(self.t)
         print('Koniec')
 
 
@@ -38,7 +39,7 @@ class index:
 
 
     def showData(self):
-        print(self.dataHandler.jsonData)
+        print(self.dataHandler.JSON)
 
 get = index()
 get.GET()
